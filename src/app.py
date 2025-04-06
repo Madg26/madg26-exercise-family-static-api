@@ -91,7 +91,7 @@ def delete_member(id):
     result = jackson_family.delete_member(id)
     if result is None:
         return jsonify({'msg': 'Miembro no encontrado'}), 404
-    return jsonify({'msg' : 'Done'}), 200
+    return jsonify({'done' : True}), 200
 
 # this only runs if `$ python src/app.py` is executed
 if __name__ == '__main__':
