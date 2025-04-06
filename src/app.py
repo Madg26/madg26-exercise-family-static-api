@@ -80,19 +80,18 @@ def add_member():
 
 
 @app.route('/member/<int:id>', methods=['GET'])
-def member(id):
-    response = jackson_family.get_all_members()
-    member_found = None
-    for member in response:
-        if member['id'] == id:
-            member_found = member
-            print(member_found)
-            break
-    if member_found:
-        return jsonify(member_found), 200
-    else:
+def get_member(id):
+    response = jackson_family.get_member(id)
+    if response is None:
         return jsonify({'msg': 'Miembro no encontrado'}), 404
+    return jsonify(response)
 
+@app.route('/member/<int:id>', methods=['DELETE'])
+def delete_member(id):
+    result = jackson_family.delete_member(id)
+    if result is None:
+        return jsonify({'msg': 'Miembro no encontrado'}), 404
+    return jsonify({'msg' : 'Done'}), 200
 
 # this only runs if `$ python src/app.py` is executed
 if __name__ == '__main__':
